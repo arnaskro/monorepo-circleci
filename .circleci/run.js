@@ -26,7 +26,7 @@ const isInDirectoryRoot = directoriesOnRoot => directory =>
 ;(() => {
   exec(GIT_COMMAND);
   const modifiedDirectories = readFileContent("modifiedProjects");
-  const directoriesOnRoot = readFileContent("/.circleci/projects.txt");
+  const directoriesOnRoot = readFileContent("./.circleci/projects.txt");
   const directoriesToTriggerAJob = modifiedDirectories.filter(isInDirectoryRoot(directoriesOnRoot));
   directoriesToTriggerAJob.forEach(launchADirectoryJob);
 })();
