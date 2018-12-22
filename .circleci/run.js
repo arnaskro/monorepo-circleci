@@ -24,12 +24,11 @@ const launchADirectoryJob = directory => {
 const isInDirectoryRoot = allProjects => project => allProjects.includes(project);
 
 ;(() => {
-  console.log("CIRCLE_API_TOKEN")
-  console.log(CIRCLE_API_TOKEN)
-  
   const allProjects = readFileContent("./.circleci/projects.txt");
   const modifiedProjects = allProjects.filter(isModified);
   // .forEach(isInDirectoryRoot(allProjects))
+  exec('git diff --no-commit-id --name-only | sort -u | uniq > testing')
+  console.log(readFileContent('testing'))
   console.log(modifiedProjects)
 
 
