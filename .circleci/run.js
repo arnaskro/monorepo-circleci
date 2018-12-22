@@ -2,7 +2,9 @@ const { readFileSync } = require("fs");
 const { exec } = require("child_process");
 const { CIRCLE_API_USER_TOKEN = "" } = process.env;
 const GIT_COMMAND =
-  'git diff --no-commit-id --name-only -r `git log -n 2 --oneline --pretty=format:"%h" | tail -n1` | cut -d/ -f1 | sort -u >  modifiedProjects';
+  'git diff --name-only $1 | sort -u | uniq | grep $2 > modifiedProjects'  
+// 'git diff --no-commit-id --name-only -r `git log -n 2 --oneline --pretty=format:"%h" | tail -n1` | cut -d/ -f1 | sort -u >  modifiedProjects';
+
 
 const readFileContent = fileName => {
   try {
