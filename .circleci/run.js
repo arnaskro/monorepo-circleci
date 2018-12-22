@@ -1,6 +1,6 @@
 const { readFileSync } = require("fs");
 const { exec } = require("child_process");
-const { CIRCLE_API_TOKEN = "", CIRCLE_PROJECT_USERNAME, CIRCLE_PROJECT_REPONAME, CIRCLE_BRANCH } = process.env;
+const { CIRCLE_API_TOKEN = "", CIRCLE_PROJECT_USERNAME, CIRCLE_PROJECT_REPONAME, CIRCLE_BRANCH, CIRCLE_COMPARE_URL } = process.env;
 const GIT_COMMAND = (project) => `git diff --no-commit-id --name-only | sort -u | uniq | grep ${project} > isModified`;
 
 const readFileContent = fileName => {
@@ -25,6 +25,7 @@ const isInDirectoryRoot = allProjects => project => allProjects.includes(project
 
 ;(() => {
   console.log(CIRCLE_COMPARE_URL)
+  console.log(process.env)
   // const allProjects = readFileContent("./.circleci/projects.txt");
   // const modifiedProjects = allProjects.filter(isModified);
   // // .forEach(isInDirectoryRoot(allProjects))
