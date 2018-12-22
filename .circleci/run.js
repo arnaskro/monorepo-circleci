@@ -24,12 +24,13 @@ const launchADirectoryJob = directory => {
 const isInDirectoryRoot = allProjects => project => allProjects.includes(project);
 
 ;(() => {
-  const allProjects = readFileContent("./.circleci/projects.txt");
-  const modifiedProjects = allProjects.filter(isModified);
-  // .forEach(isInDirectoryRoot(allProjects))
-  exec('git diff --no-commit-id --name-only | sort -u | uniq > testing')
-  console.log(readFileContent('testing'))
-  console.log(modifiedProjects)
+  console.log(CIRCLE_COMPARE_URL)
+  // const allProjects = readFileContent("./.circleci/projects.txt");
+  // const modifiedProjects = allProjects.filter(isModified);
+  // // .forEach(isInDirectoryRoot(allProjects))
+  // exec('git diff --no-commit-id --name-only | sort -u | uniq > testing')
+  // console.log(readFileContent('testing'))
+  // console.log(modifiedProjects)
 
 
 
