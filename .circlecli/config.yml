@@ -1,0 +1,38 @@
+version: 2
+jobs:
+  default:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run:
+          name: Determine which directories have changed 
+          command: |
+            node ./.circleci/run.js  
+  projects/projectA:
+    working_directory: ~/projects/projectA
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run:
+          name: Build projects/projectA
+          command: |
+            cd projects/projectA
+            npm install
+  projects/projectB:
+    working_directory: ~/projects/projectB
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run:
+          name: Build projects/projectB
+          command: |
+            cd projects/projectB
+            npm install
+workflows:
+  version: 2
+  build:
+    jobs:
+      - default
