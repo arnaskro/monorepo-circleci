@@ -1,9 +1,7 @@
 const { readFileSync } = require("fs");
 const { exec } = require("child_process");
-const { CIRCLE_API_USER_TOKEN = "", CIRCLE_COMPARE_URL } = process.env;
-const GIT_COMMAND = () => `git diff --name-only ${name} | sort -u | uniq | grep $2 > isModified`
-// 'git diff --no-commit-id --name-only -r `git log -n 2 --oneline --pretty=format:"%h" | tail -n1` | cut -d/ -f1 | sort -u >  modifiedProjects';
-
+const { CIRCLE_API_USER_TOKEN = "", CIRCLE_SHA1 } = process.env;
+const GIT_COMMAND = () => `git diff --no-commit-id --name-only | sort -u | uniq | grep $2 > modifiedProjects`;
 
 const readFileContent = fileName => {
   try {
@@ -27,14 +25,16 @@ const isInDirectoryRoot = directoriesOnRoot => directory =>
   directoriesOnRoot.includes(directory);
 
 ;(() => {
-  console.log(CIRCLE_COMPARE_URL)
-  console.log(process.env)
-  // exec(GIT_COMMAND);
-  // const modifiedDirectories = readFileContent("modifiedProjects");
-  // const directoriesOnRoot = readFileContent("./.circleci/projects.json");
+  console.log("CIRCLE_API_USER_TOKEN")
+  console.log(CIRCLE_API_USER_TOKEN)
+  exec(GIT_COMMAND);
+  const modifiedDirectories = readFileContent("modifiedProjects");
+  console.log('modifiedDirectories')
+  console.log(modifiedDirectories)
+  const directoriesOnRoot = readFileContent("./.circleci/projects.json");
+  console.log('directoriesOnRoot')
+  console.log(directoriesOnRoot)
   // const directoriesToTriggerAJob = modifiedDirectories.filter(isInDirectoryRoot(directoriesOnRoot));
-  // console.log('modifiedDirectories')
-  // console.log(modifiedDirectories)
   // console.log("directoriesToTriggerAJob")
   // console.log(directoriesToTriggerAJob)
   // directoriesToTriggerAJob.forEach(launchADirectoryJob);
