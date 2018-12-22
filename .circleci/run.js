@@ -15,6 +15,8 @@ const readFileContent = fileName => {
 };
 
 const launchADirectoryJob = directory => {
+  console.log(directory)
+  console.log(CIRCLE_API_USER_TOKEN)
   exec(`curl -s -u ${CIRCLE_API_USER_TOKEN} \
                 -d build_parameters[CIRCLE_JOB]=${directory} \
                 https://circleci.com/api/v1.1/project/github/devtoni/sample-monorepo-circleci/tree/master`);
@@ -26,9 +28,7 @@ const isInDirectoryRoot = directoriesOnRoot => directory =>
 ;(() => {
   exec(GIT_COMMAND);
   const modifiedDirectories = readFileContent("modifiedProjects");
-  const directoriesOnRoot = readFileContent("./.circleci/projects.txt");
-  console.log("hey boss")
-  console.log(directoriesOnRoot)
+  const directoriesOnRoot = readFileContent("./.circleci/projects.json");
   const directoriesToTriggerAJob = modifiedDirectories.filter(isInDirectoryRoot(directoriesOnRoot));
   directoriesToTriggerAJob.forEach(launchADirectoryJob);
 })();
