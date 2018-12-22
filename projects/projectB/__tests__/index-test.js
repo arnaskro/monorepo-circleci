@@ -11,3 +11,4 @@ test('adds 14 + 6 to equal 20', () => {
 test('adds 30 + -120 to equal -90', () => {
   expect(sum(30, -120)).toBe(-90);
 });
+
