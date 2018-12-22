@@ -30,5 +30,7 @@ const isInDirectoryRoot = directoriesOnRoot => directory =>
   const modifiedDirectories = readFileContent("modifiedProjects");
   const directoriesOnRoot = readFileContent("./.circleci/projects.json");
   const directoriesToTriggerAJob = modifiedDirectories.filter(isInDirectoryRoot(directoriesOnRoot));
+  console.log("directoriesToTriggerAJob")
+  console.log(directoriesToTriggerAJob)
   directoriesToTriggerAJob.forEach(launchADirectoryJob);
 })();
