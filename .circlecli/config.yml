@@ -20,6 +20,8 @@ jobs:
           command: |
             cd projects/projectA
             npm install
+            npm run test
+            echo 'deploying'
   projects/projectB:
     working_directory: ~/projects/projectB
     docker:
@@ -31,6 +33,8 @@ jobs:
           command: |
             cd projects/projectB
             npm install
+            npm run test
+            echo 'deploying'
 workflows:
   version: 2
   build:
